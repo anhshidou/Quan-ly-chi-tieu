@@ -11,7 +11,7 @@
 
 <body>
    <h1>Login</h1>
-    <form action="login.php" method="POST">
+    <form action="index.php?route=login_post" method="POST">
         <div class="login">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
@@ -19,10 +19,10 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             <br>
-            <input type="submit" value="Login">
+            <input type="submit" name="login" value="Login">
         </div>
         <div class="register-link">
-            <p>Don't have an account? <a href="register.html">Register here</a></p>
+            <p>Don't have an account? <a href="index.php?route=register">Register here</a></p>
         </div>
     </form>
 

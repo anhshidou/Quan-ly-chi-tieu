@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Logout nav nằm ngoài wrapper để căn góc -->
+  <nav class="dashboard-nav" style="position:fixed; top:20px; right:20px; z-index:1000;">
+    <?php if(isset($_SESSION['username'])): ?>
+      <span>Welcome, <?= htmlspecialchars($_SESSION['username']); ?></span>
+      <a href="index.php?route=logout">Logout</a>
+    <?php endif; ?>
+  </nav>
+
+  <div class="wrapper">
+    <h1>Expense Dashboard</h1>
+
+    <form class="expense-form" action="index.php?route=expense_post" method="POST">
+      <h2>Add Expense</h2>
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" name="amount" required>
+
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" required>
+
+      <input type="submit" value="Add">
+    </form>
+
+    <table class="expense-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php if (empty($expenses)): ?>
+          <tr><td colspan="5">No records.</td></tr>
+        <?php else: foreach ($expenses as $r): ?>
+          <tr>
+            <td><?= $r['id'] ?></td>
+            <td><?= $r['date'] ?></td>
+            <td><?= number_format($r['expense'], 0, ',', '.') ?>₫</td>
+            <td><?= htmlspecialchars($r['description']) ?></td>
+            <td>
+              <a href="index.php?route=expense_edit&id=<?= $r['id'] ?>">Edit</a> |
+              <a href="index.php?route=expense_delete&id=<?= $r['id'] ?>" onclick="return confirm('Del?')">Delete</a> |
+              <a href="index.php?route=upload&id=<?= $r['id'] ?>">Upload</a>
+            </td>
+          </tr>
+        <?php endforeach; endif; ?>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

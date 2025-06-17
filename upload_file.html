@@ -4,22 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Note</title>
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Upload File</h1>
-    <form action="upload_file.php" method="POST" enctype="multipart/form-data">
-        <label for="entry_id">Entry ID:</label>
+    <form action="index.php?route=upload_post" method="POST" enctype="multipart/form-data">
+        <label for="entry_id">Expense ID:</label>
         <input type="text" id="entry_id" name="entry_id" required>
         <div class="upload-form">
             <label for="file">Select file to upload:</label>
             <input type="file" id="file" name="file" required>
             <br>
-            <input type="submit" value="Upload File">
+            <input type="submit" name="upload" value="Upload File">
         </div>
         <div class="back-link">
-            <p><a href="expense_note.html">Back to Home</a></p>
+            <p><a href="index.php?route=expense">Back to Home</a></p>
         </div>
     </form>
 </body>
